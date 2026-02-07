@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Azura</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:black;
+    color:white;
+    text-align:center;
+}
+
+.rainbow{
+    font-weight:bold;
+    font-size:22px;
+}
+
+button{
+    margin:5px;
+    padding:8px 15px;
+    cursor:pointer;
+}
+
+#nyawa{
+    margin-top:15px;
+    font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<h1>QUIZ AZURA</h1>
+<div id="quiz"></div>
+<div id="nyawa"></div>
+
+<script>
+
+let nyawa = 3;
+let setengah = 0;
+let streak = 0;
+let pilihFish = false;
+
+function updateNyawa(){
+    document.getElementById("nyawa").innerText = 
+    "Nyawa: " + nyawa + " | Setengah: " + setengah;
+}
+
+function addHalf(){
+    setengah++;
+    if(setengah >= 2){
+        nyawa++;
+        setengah = 0;
+        alert("Setengah + setengah jadi 1 nyawa!");
+    }
+}
+
+function wrongNotif(){
+    let notif = [
+        "Yah salah~",
+        "Kurang tepat hehe",
+        "Coba lagi~",
+        "Hmm bukan itu"
+    ];
+    alert(notif[Math.floor(Math.random()*notif.length)]);
+    nyawa--;
+    streak=0;
+    updateNyawa();
+}
+
+function correct(){
+    alert("Benar!");
+    streak++;
+    if(streak>=5){
+        nyawa++;
+        streak=0;
+        alert("5x berturut turut! +1 nyawa!");
+    }
+    updateNyawa();
+}
+
+const data = [
+
+{
+text:"Hai hai, welkam ke quiz ini.. pertama tama yang mudh dulu yh, btw kalo benar 5x berturut turut kalian dpat + 1 nyawa",
+title:"[ what's my name-? ]",
+opsi:["A.Kyezure","B.kyeZURE","C.Azura","D.jure"],
+jawab:function(p){
+if(p=="A"){correct();}
+else if(p=="C"){alert("Tanta tanya?"); alert("Tanta tanya??"); alert("Tanta tanya???");}
+else if(p=="D"){alert("eee itu julukan dari seseorang sebenarnya"); wrongNotif();}
+else{wrongNotif();}
+}
+},
+
+{
+text:"Mudah bukan? Coba yang ini ⬇",
+title:"[ what is my nama panggilan? ]",
+opsi:["A. ur","B. jure","C. zure","D. kye"],
+jawab:function(p){
+if(p=="B"||p=="C"||p=="D"){alert("ada yang panggil aku begitu sih"); correct();}
+else if(p=="A"){alert("ur  paan cobaa-? Aur aur an?"); wrongNotif();}
+}
+},
+
+{
+text:"ꉂ(˵˃ ᗜ ˂˵)",
+title:"[ apa makanan fav kyezure? ]",
+opsi:["A. FishH","B. tometeo","C. hUman","D. ???"],
+jawab:function(p){
+if(p=="D"){correct();}
+else if(p=="C"){
+wrongNotif();
+setTimeout(()=>{
+nyawa++;
+alert("human? Why did u pick that?");
+updateNyawa();
+},2000);
+}
+else if(p=="A"){
+pilihFish=true;
+alert("suka tapi kurang tepat");
+wrongNotif();
+}
+else{wrongNotif();}
+}
+},
+
+{
+text:"gini aja ya..( kyezure  = Oc ) ( Az = author ) sebenarnya aku menganggap diri ku an kyezure adalah orang yang berbeda",
+title:"[ apa warna kesukaan Az? ]",
+opsi:["A. Hitam","B. Hijau","C. Putih","D. Biru"],
+jawab:function(p){
+if(p=="D"){correct();}
+else{wrongNotif();}
+}
+},
+
+{
+text:"ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧",
+title:"[ apa minuman kesukaan az? ]",
+opsi:["A. air putih","B. matcha","C. soda","D. es teh"],
+jawab:function(p){
+if(p=="B"){correct();}
+else if(p=="A"){
+alert("aku ga minum air putih yh.. aku minum air bening, air putih paan ???? susu!?");
+wrongNotif();
+}
+else{wrongNotif();}
+}
+},
+
+{
+text:"apakah sebelumnya ada yang memilih \"FishH\" ? kalau ada alhamdulilah pesan ku di baca, hehe",
+title:"[ apa yang Az tidk suka? ]",
+opsi:["A. Kegelapan","B. Hantu / penampakan","C. suara keras","D. bau menyengat"],
+jawab:function(p){
+if(p=="A"){correct();}
+else if(p=="B"||p=="C"){
+alert("iya juga sih... yaudah ku kasih setengah nyawa");
+addHalf();
+correct();
+}
+else{wrongNotif();}
+}
+},
+
+{
+text:"bacanya yang teliti yah, bedakan \"Az\" dengan \"kyezure\" hehe..",
+title:"[ kira kira apa hobi az? ]",
+opsi:["A. membaca cerita","B. menggambar","C. bercerita","D. bermain"],
+jawab:function(p){
+if(p=="A"||p=="B"){correct();}
+else if(p=="D"){
+setTimeout(()=>{
+alert("iya tapi ga juga aku suka main.. hp?... ku kasih setengah nyawa dahh karna aku baik");
+addHalf();
+},1000);
+wrongNotif();
+}
+else{wrongNotif();}
+}
+},
+
+{
+text:"gatau mau nulis apa",
+title:"[ apa makanan kesukaan az? ]",
+opsi:["A. ikan","B. roti","C. burger","D. mie ayam"],
+jawab:function(p){
+if(p=="A"||p=="B"){correct();}
+else if(p=="C"){alert("ga terlalu suka"); wrongNotif();}
+else if(p=="D"){alert("tergantung sih"); wrongNotif();}
+}
+},
+
+{
+text:"◝(ᵔᗜᵔ)◜",
+title:"[ tanggal berapa ulang tahun kyezure? ]",
+opsi:["A. 15","B. 18","C. 17","D. I7"],
+jawab:function(p){
+if(p=="C"){correct();}
+else if(p=="D"){alert("Bro?? itu i besar, jadi kelihatan kayak 1 .."); wrongNotif();}
+else{wrongNotif();}
+}
+},
+
+{
+text:"keren",
+title:"[ tanggal berapa ulang tahun az? ]",
+opsi:["A. 19","B. 17","C. 18","D. 16"],
+jawab:function(p){
+if(p=="B"){alert("Ea tanggalny sama, kyezure ama az. kebetulan sumpah aku buat oc kyezure tanggal 17"); correct();}
+else{wrongNotif();}
+}
+},
+
+{
+text:"sekarang bulan",
+title:"[ bulan lahir az? ]",
+opsi:["A. oktober","B. desember","C. mei","D. agustus"],
+jawab:function(p){
+if(p=="A"){correct();}
+else if(p=="D"){alert("haha...17 agustus tahun..emmmmpaattttttt limmmmmmmmmmmaaaaaaaaaa it lah hari k-"); wrongNotif();}
+else{wrongNotif();}
+}
+},
+
+{
+text:"(·•᷄‎ࡇ•᷅ )",
+title:"[ pertannyaan nya sama kayak yang tadi cuman ini kyezure ]",
+opsi:["A. april","B. maret","C. agustus","D. oktober"],
+jawab:function(p){
+if(p=="A"){correct();}
+else if(p=="C"){alert("stop yh, bukan agustus. #buatyangsebelumnyapilihagustus"); wrongNotif();}
+else{wrongNotif();}
+}
+},
+
+{
+text:"▶︎•၊၊||၊|။|||||။၊|။•",
+title:"[ apa lagu kesukaan az? ]",
+opsi:["A. ignite","B. secret garden","C. unity","D. fearless"],
+jawab:function(p){
+if(p=="B"){correct();}
+else{alert("suka sih tapi kurang tepat"); wrongNotif();}
+}
+},
+
+{
+text:"Kalian ga NGECHEAT kan?????????????????? ( mastiin aja )",
+title:"[ . . . ]",
+opsi:["A. Iya","B. Ga"],
+jawab:function(p){
+if(p=="A"){
+alert("kamu jwab IYA?? kalian ngaku ngecheat haaaa... ......ga suka.");
+addHalf();
+}
+else{
+alert("kamu jwab Ga?? baguslah.. semoga kau jujur.");
+addHalf();
+}
+}
+}
+
+];
+
+let index=0;
+
+function tampil(){
+if(index>=data.length){
+document.getElementById("quiz").innerHTML="<h2>Quiz Selesai!</h2>";
+return;
+}
+
+let q=data[index];
+let html="<p>"+q.text+"</p>";
+html+="<div class='rainbow'>"+q.title+"</div><br>";
+
+q.opsi.forEach(o=>{
+let huruf=o[0];
+html+="<button onclick=\"jawab('"+huruf+"')\">"+o+"</button><br>";
+});
+
+document.getElementById("quiz").innerHTML=html;
+}
+
+function jawab(p){
+data[index].jawab(p);
+index++;
+setTimeout(tampil,500);
+}
+
+setInterval(()=>{
+let el=document.querySelector(".rainbow");
+if(el){
+el.style.color="hsl("+Math.random()*360+",100%,60%)";
+}
+},100);
+
+updateNyawa();
+tampil();
+
+</script>
+
+</body>
+  </html>
